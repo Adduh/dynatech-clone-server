@@ -1,3 +1,3 @@
 exports.foo = function() {
-	console.log("Game server foo started");
+	console.log("Game server foo started1");
 };

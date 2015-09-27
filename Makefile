@@ -1,4 +1,4 @@
-BIN 	= ./node_modules/.bin
+BIN     = ./node_modules/.bin
 BROWSER = google-chrome
 
 .PHONY: run
@@ -12,6 +12,10 @@ jshint:
 .PHONY: test
 test:
 	$(BIN)/mocha
+
+.PHONY: watch
+watch:
+	$(BIN)/mocha -w
 
 instrument: clean-coverage
 	$(BIN)/istanbul instrument --output lib-cov --no-compact --variable global.__coverage__ src
