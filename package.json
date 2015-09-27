@@ -4,10 +4,10 @@
   "description": "Game server for a clone of the game \"Dynatech\"",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "mocha",
-    "coverage": "istanbul cover _mocha -- -R spec",
-    "jshint": "jshint **.js"
+    "start": "make run",
+    "test": "make test",
+    "coverage": "make coverage",
+    "jshint": "make jshint"
   },
   "repository": {
     "type": "git",

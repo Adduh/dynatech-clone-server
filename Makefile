@@ -1,12 +1,20 @@
 BIN 	= ./node_modules/.bin
 BROWSER = google-chrome
 
-instrument: clean-coverage
-	$(BIN)/istanbul instrument --output lib-cov --no-compact --variable global.__coverage__ src
+.PHONY: run
+run:
+	node index.js
+
+.PHONY: jshint
+jshint:
+	$(BIN)/jshint src/**.js test/**.js
 
 .PHONY: test
 test:
 	$(BIN)/mocha
+
+instrument: clean-coverage
+	$(BIN)/istanbul instrument --output lib-cov --no-compact --variable global.__coverage__ src
 
 .PHONY: cover
 cover: coverage
