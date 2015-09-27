@@ -1,0 +1,28 @@
+{
+  "name": "dynatech-clone-server",
+  "version": "0.0.1",
+  "description": "Game server for a clone of the game \"Dynatech\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha -- -R spec",
+    "jshint": "jshint **.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adduh/dynatech-clone-server.git"
+  },
+  "author": "Artur Taube",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Adduh/dynatech-clone-server/issues"
+  },
+  "homepage": "https://github.com/Adduh/dynatech-clone-server#readme",
+  "devDependencies": {
+    "istanbul": "^0.3.21",
+    "jshint": "latest",
+    "mocha": "^2.3.3",
+    "mocha-istanbul": "^0.2.0"
+  }
+}
