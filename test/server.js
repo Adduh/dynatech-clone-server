@@ -1,7 +1,7 @@
-"use strict";
-require("blanket");
-var assert = require("assert");
-var net = require("net");
+'use strict';
+require('blanket');
+var assert = require('assert');
+var net = require('net');
 
 var Server = require("../src/server.js").Server;
 describe('Server', function() {
@@ -27,6 +27,15 @@ describe('Server', function() {
         server.stop();
       });
     });
+
+    it('start should throw an error when start is called twice', function() {
+      server.start(5050);
+      assert.throws(function() {
+        server.start(5050);
+      }, 'Called Server Start twice!');
+      server.stop();
+    });
+
   });
 
   describe('Stop Server', function() {

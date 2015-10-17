@@ -9,6 +9,9 @@ Server.prototype.start = function (port, callback) {
   if (typeof port === 'undefined') {
     port = 5000;
   }
+  if (this.server !== null) {
+    throw new Error('Called Server Start twice!');
+  }
   var server = net.createServer(function(c) {
     console.log('new client connected!');
     c.on('end', function () {
@@ -21,6 +24,7 @@ Server.prototype.start = function (port, callback) {
 
 Server.prototype.stop = function (callback) {
   this.server.close(callback);
+  this.server = null;
 }
 
 module.exports = { Server: Server };
