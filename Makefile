@@ -7,25 +7,26 @@ run: src node_modules
 
 .PHONY: jshint
 jshint:
-	$(BIN)/jshint src/**.js test/**.js
+	@$(BIN)/jshint src/**.js test/**.js
+	@echo "\033[0;32m ✔ \033[0m No checkstyle errors found by JSHint."
 
 .PHONY: test
 test:
-	$(BIN)/mocha
+	@$(BIN)/mocha
 
 .PHONY: watch
 watch:
-	$(BIN)/mocha -w
+	@$(BIN)/mocha -w
 
 .PHONY: cover
 cover: coverage
 
 .PHONY: coverage
 coverage:
-	$(BIN)/mocha --require blanket -R html-cov > coverage/index.html
-	@echo
-	@echo Opening coverage/index.html file in your browser now
-	$(BROWSER) coverage/index.html
+	@multi='spec=- travis-cov=- html-cov=coverage.html' $(BIN)/mocha --require blanket -R mocha-multi
+	@echo "\033[0;32m ✔ \033[0m"
+	@echo Opening coverage.html file in your browser now
+	@$(BROWSER) coverage.html
 
 node_modules:
 	npm install
@@ -35,4 +36,4 @@ clean: clean-coverage
 
 .PHONY: clean-coverage
 clean-coverage:
-	-rm -rf coverage
+	rm -rf coverage.html
