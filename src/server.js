@@ -2,6 +2,7 @@
 var net = require('net');
 
 var Server = function constructor() {
+  this.server = null;
 };
 
 Server.prototype.start = function (port) {
@@ -9,15 +10,17 @@ Server.prototype.start = function (port) {
     port = 5000;
   }
   var server = net.createServer(function(c) {
-    console.log("new client connected!");
+    console.log('new client connected!');
     c.on('end', function () {
-      console.log("client disconnected!");
+      console.log('client disconnected!');
     });
   });
   server.listen(port);
+  this.server = server;
 }
 
-Server.prototype.stop = function () {
+Server.prototype.stop = function (callback) {
+  this.server.close(callback);
 }
 
 module.exports = { Server: Server };

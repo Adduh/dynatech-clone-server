@@ -23,4 +23,13 @@ describe('Server', function() {
       client.end();
     });
   });
+  describe('Stop Server', function() {
+    beforeEach(function() {
+      server.start(5100);
+    });
+    it('stopping should work when no client is connected', function(done) {
+      server.stop(done);
+      //server.stop(function(err) {done()});
+    });
+  });
 });
