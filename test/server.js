@@ -12,12 +12,14 @@ describe('Server', function() {
   describe('Start Server', function() {
     it('should start with default port: 5000', function(done) {
       server.start();
-      var connected = false;
       var client = new net.connect({port: 5000},
-          function() {
-            connected = true;
-            done();
-          });
+          done);
+      client.end();
+    });
+    it('should start with specific port: 5050', function(done) {
+      server.start(5050);
+      var client = new net.connect({port: 5050},
+          done);
       client.end();
     });
   });
