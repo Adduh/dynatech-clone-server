@@ -5,7 +5,7 @@ var Server = function constructor() {
   this.server = null;
 };
 
-Server.prototype.start = function (port) {
+Server.prototype.start = function (port, callback) {
   if (typeof port === 'undefined') {
     port = 5000;
   }
@@ -15,7 +15,7 @@ Server.prototype.start = function (port) {
       console.log('client disconnected!');
     });
   });
-  server.listen(port);
+  server.listen(port, callback);
   this.server = server;
 }
 

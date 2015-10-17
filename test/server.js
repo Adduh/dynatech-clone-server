@@ -12,24 +12,39 @@ describe('Server', function() {
   describe('Start Server', function() {
     it('should start with default port: 5000', function(done) {
       server.start();
-      var client = new net.connect({port: 5000},
-          done);
-      client.end();
+      var client = new net.connect({port: 5000}, function() {
+        done();
+        client.end();
+        server.stop();
+      });
     });
+
     it('should start with specific port: 5050', function(done) {
       server.start(5050);
-      var client = new net.connect({port: 5050},
-          done);
-      client.end();
+      var client = new net.connect({port: 5050}, function() {
+        done();
+        client.end();
+        server.stop();
+      });
     });
   });
+
   describe('Stop Server', function() {
     beforeEach(function() {
       server.start(5100);
     });
+
     it('stopping should work when no client is connected', function(done) {
       server.stop(done);
-      //server.stop(function(err) {done()});
+    });
+
+    it('reopening of server should work on the same port after stopping', function(done) {
+      server.stop(function() {
+        server.start(5100,function() {
+          done();
+          server.stop();
+        });
+      });
     });
   });
 });
