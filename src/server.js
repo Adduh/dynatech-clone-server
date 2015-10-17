@@ -27,4 +27,4 @@ Server.prototype.stop = function(callback) {
   this.server = null;
 };
 
-module.exports = { Server: Server };
+module.exports = Server;

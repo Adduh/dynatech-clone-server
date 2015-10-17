@@ -3,7 +3,7 @@ require('blanket');
 var assert = require('assert');
 var net = require('net');
 
-var Server = require('../src/server.js').Server;
+var Server = require('../src/server.js');
 describe('Server', function() {
   var server;
   beforeEach(function() {
