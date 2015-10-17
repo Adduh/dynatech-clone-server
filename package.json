@@ -19,11 +19,12 @@
   },
   "homepage": "https://github.com/Adduh/dynatech-clone-server#readme",
   "devDependencies": {
-    "blanket": "^1.1.7",
+    "blanket": "latest",
+    "jscs": "latest",
     "jshint": "latest",
-    "mocha": "^2.3.3",
-    "mocha-multi": "^0.7.2",
-    "travis-cov": "^0.2.5"
+    "mocha": "latest",
+    "mocha-multi": "latest",
+    "travis-cov": "latest"
   },
   "config": {
     "blanket": {

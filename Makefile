@@ -1,9 +1,16 @@
 BIN     = ./node_modules/.bin
-BROWSER = google-chrome
 
 .PHONY: run
 run: src node_modules
 	node src/index.js
+
+.PHONE: codestyle
+codestyle: jscs jshint
+
+.PHONY: jscs
+jscs:
+	@$(BIN)/jscs src/**.js test/**.js
+	@echo "\033[0;32m ✔ \033[0m No code style errors found by JSCS."
 
 .PHONY: jshint
 jshint:
@@ -26,7 +33,7 @@ coverage:
 	@multi='spec=- travis-cov=- html-cov=coverage.html' $(BIN)/mocha --require blanket -R mocha-multi
 	@echo "\033[0;32m ✔ \033[0m"
 	@echo Opening coverage.html file in your browser now
-	@$(BROWSER) coverage.html
+	@xdg-open coverage.html
 
 node_modules:
 	npm install
