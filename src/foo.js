@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 exports.foo = function() {
-	console.log("Game server foo started1");
+  console.log('Game server foo started1');
 };
