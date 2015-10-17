@@ -2,8 +2,8 @@ BIN     = ./node_modules/.bin
 BROWSER = google-chrome
 
 .PHONY: run
-run:
-	node index.js
+run: src node_modules
+	node src/index.js
 
 .PHONY: jshint
 jshint:
@@ -17,23 +17,22 @@ test:
 watch:
 	$(BIN)/mocha -w
 
-instrument: clean-coverage
-	$(BIN)/istanbul instrument --output lib-cov --no-compact --variable global.__coverage__ src
-
 .PHONY: cover
 cover: coverage
 
 .PHONY: coverage
-coverage: instrument
-	COVER=1 $(BIN)/mocha --reporter mocha-istanbul
+coverage:
+	$(BIN)/mocha --require blanket -R html-cov > coverage/index.html
 	@echo
-	@echo Opening html-report/index.html file in your browser now
-	$(BROWSER) html-report/index.html
+	@echo Opening coverage/index.html file in your browser now
+	$(BROWSER) coverage/index.html
+
+node_modules:
+	npm install
 
 .PHONY: clean
 clean: clean-coverage
 
 .PHONY: clean-coverage
 clean-coverage:
-	-rm -rf cov
-	-rm -rf html-report
+	-rm -rf coverage

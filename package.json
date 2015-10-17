@@ -2,7 +2,6 @@
   "name": "dynatech-clone-server",
   "version": "0.0.1",
   "description": "Game server for a clone of the game \"Dynatech\"",
-  "main": "index.js",
   "scripts": {
     "start": "make run",
     "test": "make test",
@@ -20,9 +19,13 @@
   },
   "homepage": "https://github.com/Adduh/dynatech-clone-server#readme",
   "devDependencies": {
-    "istanbul": "^0.3.21",
+    "blanket": "^1.1.7",
     "jshint": "latest",
-    "mocha": "^2.3.3",
-    "mocha-istanbul": "^0.2.0"
+    "mocha": "^2.3.3"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "src"
+    }
   }
 }
