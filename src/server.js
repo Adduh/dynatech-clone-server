@@ -1,7 +1,7 @@
 'use strict';
 var net = require('net');
 
-var Server = function constructor() {
+var Server = function() {
   this.server = null;
 };
 
