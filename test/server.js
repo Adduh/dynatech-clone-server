@@ -58,7 +58,7 @@ describe('Server', function() {
       server.stop(done);
     });
 
-    it('can be started on the same port after stopping', function(done) {
+    it('releases the server socket correctly', function(done) {
       server.stop(function() {
         server.start(5100, function() {
           done();
