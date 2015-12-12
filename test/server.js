@@ -4,6 +4,7 @@ var assert = require('assert');
 var net = require('net');
 
 var Server = require('../src/server.js');
+var Connection = require('../src/connection.js');
 describe('Server', function() {
   var server;
   beforeEach(function() {
@@ -36,6 +37,16 @@ describe('Server', function() {
       server.stop();
     });
 
+    it('creates a connection after client connected', function(done) {
+      server.start(5000);
+      var client = new net.connect({port: 5000}, function() {
+        assert.equal(server.connections.length, 1);
+        client.end();
+        server.stop();
+        done();
+      });
+    });
+
   });
 
   describe('stop()', function() {
@@ -54,6 +65,13 @@ describe('Server', function() {
           server.stop();
         });
       });
+    });
+    it('removes all connections', function() {
+      server.connections.push(new Connection());
+      server.connections.push(new Connection());
+      server.connections.push(new Connection());
+      server.stop();
+      assert.equal(server.connections.length, 0);
     });
   });
 });
