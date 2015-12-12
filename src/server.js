@@ -16,7 +16,7 @@ Server.prototype.start = function(port, callback) {
     throw new Error('Called Server Start twice!');
   }
   var server = net.createServer(function(c) {
-    that.connections.push(new Connection);
+    that.connections.push(new Connection());
     console.log('new client connected!');
 
     c.on('end', function() {
