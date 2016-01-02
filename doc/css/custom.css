@@ -5,3 +5,7 @@
 .box-container {
     width: 100%;
 }
+
+.docson .signature-description {
+    max-width: 100%;
+}
