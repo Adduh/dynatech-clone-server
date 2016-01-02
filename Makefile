@@ -1,5 +1,11 @@
 BIN     = ./node_modules/.bin
 
+ifeq ($(shell uname), Darwin)
+	OPEN-CMD = open
+else
+	OPEN-CMD = xdg-open
+endif
+
 .PHONY: run
 run: src node_modules
 	node src/index.js
@@ -33,10 +39,18 @@ coverage:
 	@multi='spec=- travis-cov=- html-cov=coverage.html' $(BIN)/mocha --require blanket -R mocha-multi
 	@echo "\033[0;32m ✔ \033[0m"
 	@echo Opening coverage.html file in your browser now
-	@xdg-open coverage.html
+	@$(OPEN-CMD) coverage.html
 
 node_modules:
 	npm install
+
+.PHONY: api
+api:
+	@$(BIN)/http-server -c-1 doc
+
+.PHONY: open-api
+open-api:
+	@$(BIN)/http-server doc -c-1 -o
 
 .PHONY: clean
 clean: clean-coverage
