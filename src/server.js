@@ -15,12 +15,13 @@ Server.prototype.start = function(port, callback) {
   if (this.server !== null) {
     throw new Error('Called Server Start twice!');
   }
-  var server = net.createServer(function(c) {
-    that.connections.push(new Connection());
+  var server = net.createServer(function(socket) {
+    that.connections.push(new Connection(socket));
     console.log('new client connected!');
 
-    c.on('end', function() {
+    socket.on('end', function() {
       console.log('client disconnected!');
+      that.connections = that.connections.filter(element=>element!=socket);
     });
   });
   server.listen(port, callback);

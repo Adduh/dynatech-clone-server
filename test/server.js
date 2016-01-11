@@ -46,6 +46,16 @@ describe('Server', function() {
         done();
       });
     });
+    it('registers events', function(done) {
+      server.start(5000);
+      var client = new net.connect({port: 5000}, function() {
+        assert.equal(server.connections[0].socket.listenerCount('data'), 1);
+        assert.equal(server.connections[0].socket.listenerCount('end'), 2);
+        client.end();
+        server.stop();
+        done();
+      });
+    });
 
   });
 
@@ -67,9 +77,9 @@ describe('Server', function() {
       });
     });
     it('removes all connections', function() {
-      server.connections.push(new Connection());
-      server.connections.push(new Connection());
-      server.connections.push(new Connection());
+      server.connections.push(1);
+      server.connections.push(2);
+      server.connections.push(3);
       server.stop();
       assert.equal(server.connections.length, 0);
     });
