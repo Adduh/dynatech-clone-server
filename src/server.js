@@ -29,9 +29,15 @@ Server.prototype.start = function(port, callback) {
 };
 
 Server.prototype.stop = function(callback) {
-  this.server.close(callback);
+  var state = this.server ? "running" : "already stopped";
+  console.log("Stop (%s) server!", state);
+  if (!this.server) {
+    typeof callback === 'function' && callback();
+  } else {
+    this.server.close(callback);
+    this.server = null;
+  }
   this.connections = [];
-  this.server = null;
 };
 
 module.exports = Server;

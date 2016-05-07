@@ -4,75 +4,83 @@ var assert = require('assert');
 var net = require('net');
 
 var Server = require('../src/server.js');
-var Connection = require('../src/connection.js');
+
 describe('Server', function() {
   var server;
-  beforeEach(function() {
-    server = new Server();
-  });
+  const DEFAULT_PORT = 5000;
+  const WAIT_AFTER_CONNECT = 1;
+
+  beforeEach(() => { server = new Server() });
+  afterEach(done => { server.stop(done) });
+
   describe('start()', function() {
+    var client;
+
     it('starts with default port: 5000', function(done) {
       server.start();
-      var client = new net.connect({port: 5000}, function() {
-        done();
+      client = new net.connect(5000, function() {
         client.end();
-        server.stop();
+        done();
       });
     });
 
     it('starts with specific port: 5050', function(done) {
       server.start(5050);
-      var client = new net.connect({port: 5050}, function() {
-        done();
+      client = new net.connect(5050, function() {
         client.end();
-        server.stop();
+        done();
       });
     });
 
     it('throws an error when start is called twice', function() {
-      server.start(5050);
+      server.start();
       assert.throws(function() {
-        server.start(5050);
+        server.start();
       }, 'Called Server Start twice!');
-      server.stop();
     });
 
     it('creates a connection after client connected', function(done) {
-      server.start(5000);
-      var client = new net.connect({port: 5000}, function() {
-        assert.equal(server.connections.length, 1);
-        client.end();
-        server.stop();
-        done();
+      server.start(DEFAULT_PORT, function() {
+        client = new net.connect(DEFAULT_PORT, function() {
+          setTimeout(function() {
+            assert.equal(server.connections.length, 1);
+            client.end();
+            done();
+          }, WAIT_AFTER_CONNECT);
+        });
       });
+
     });
     it('registers events', function(done) {
-      server.start(5000);
-      var client = new net.connect({port: 5000}, function() {
-        assert.equal(server.connections[0].socket.listenerCount('data'), 1);
-        assert.equal(server.connections[0].socket.listenerCount('end'), 2);
-        client.end();
-        server.stop();
-        done();
+      server.start();
+      client = new net.connect(DEFAULT_PORT, function() {
+        setTimeout(() => {
+          assert.equal(server.connections[0].socket.listenerCount('data'), 1);
+          assert.equal(server.connections[0].socket.listenerCount('end'), 2);
+          client.end();
+          done();
+        }, WAIT_AFTER_CONNECT);
       });
     });
-
   });
 
   describe('stop()', function() {
-    beforeEach(function() {
-      server.start(5100);
+    beforeEach(() => {
+      server.start();
     });
 
     it('works when no client is connected', function(done) {
       server.stop(done);
     });
 
+    it('handles non-functional callback', function() {
+      server.stop("foo");
+    });
+
     it('releases the server socket correctly', function(done) {
       server.stop(function() {
-        server.start(5100, function() {
-          done();
-          server.stop();
+        server.start(DEFAULT_PORT, function() {
+          server.stop(done);
         });
       });
     });
