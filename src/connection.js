@@ -1,18 +1,19 @@
 'use strict';
 
-var Connection = function(socket) {
-  var that = this;
-  this.socket = socket;
-  socket.setEncoding('utf8');
-  socket.on('data', function(data) {
-    that.onRecv(data);
-  });
-};
+class Connection {
+  constructor(socket) {
+    this.socket = socket;
+    socket.setEncoding('utf8');
+    socket.on('data', data => {
+      this.onRecv(data);
+    });
+  }
 
-Connection.prototype.init = function() {
-};
+  init() {
+  }
 
-Connection.prototype.onRecv = function(data) {
-  console.log(data);
-};
+  onRecv(data) {
+    console.log(data);
+  }
+}
 module.exports = Connection;

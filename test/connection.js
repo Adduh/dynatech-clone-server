@@ -4,18 +4,18 @@ var net = require('net');
 var assert = require('assert');
 
 var Connection = require('../src/connection.js');
-describe('Connection', function() {
+describe('Connection', () => {
   var connection;
-  describe('constructor', function() {
-    it('registers onRecv event', function() {
+  describe('constructor', () => {
+    it('registers onRecv event', () => {
       var socket = new net.Socket();
       assert.equal(socket.listenerCount('data'), 0);
       connection = new Connection(socket);
       assert.equal(socket.listenerCount('data'), 1);
     });
   });
-  describe('onRecv(data)', function() {
-    it('parses data!', function() {
+  describe('onRecv(data)', () => {
+    it('parses data!', () => {
     });
   });
 });

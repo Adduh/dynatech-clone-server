@@ -1,6 +1,6 @@
 dynatech-clone-server
 =====================
 
-Project uses Node.JS (v4.1.1)
+Project uses Node.JS (v6.1.0)
 
 Run `npm install`
