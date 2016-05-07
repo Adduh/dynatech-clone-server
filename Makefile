@@ -1,4 +1,5 @@
-BIN     = ./node_modules/.bin
+BIN            = node_modules/.bin
+COVERAGE_INDEX = coverage/lcov-report/src/index.html
 
 ifeq ($(shell uname), Darwin)
 	OPEN-CMD = open
@@ -36,10 +37,9 @@ cover: coverage
 
 .PHONY: coverage
 coverage:
-	@multi='spec=- travis-cov=- html-cov=coverage.html' $(BIN)/mocha --require blanket -R mocha-multi
-	@echo "\033[0;32m ✔ \033[0m"
-	@echo Opening coverage.html file in your browser now
-	@$(OPEN-CMD) coverage.html
+	@$(BIN)/istanbul cover $(BIN)/_mocha -- -R min test 2>/dev/null
+	@echo "Opening $(COVERAGE_INDEX) file in your browser now"
+	@$(OPEN-CMD) $(COVERAGE_INDEX)
 
 node_modules:
 	npm install
@@ -57,4 +57,4 @@ clean: clean-coverage
 
 .PHONY: clean-coverage
 clean-coverage:
-	rm -rf coverage.html
+	rm -rf coverage/

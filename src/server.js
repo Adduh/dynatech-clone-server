@@ -8,7 +8,6 @@ class Server {
     this.connections = [];
   }
 
-
   start(port, callback) {
     if (typeof port === 'undefined') {
       port = 5000;
@@ -18,10 +17,10 @@ class Server {
     }
     var server = net.createServer(socket => {
       this.connections.push(new Connection(socket));
-      console.log('new client connected!');
+      console.warn('new client connected!');
 
       socket.on('end', () => {
-        console.log('client disconnected!');
+        console.warn('client disconnected!');
         this.connections = this.connections.filter(element =>
           element !== socket);
       });
@@ -32,7 +31,8 @@ class Server {
 
   stop(callback) {
     var state = this.server ? 'running' : 'already stopped';
-    console.log('Stop (%s) server!', state);
+    console.warn('Stop (%s) server!', state);
+
     if (!this.server) {
       if (typeof callback === 'function') {
         callback();

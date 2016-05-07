@@ -1,9 +1,10 @@
 'use strict';
-require('blanket');
+
 var net = require('net');
 var assert = require('assert');
 
 var Connection = require('../src/connection.js');
+
 describe('Connection', () => {
   var connection;
   describe('constructor', () => {

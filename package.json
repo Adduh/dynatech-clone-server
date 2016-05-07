@@ -20,17 +20,10 @@
   },
   "homepage": "https://github.com/Adduh/dynatech-clone-server#readme",
   "devDependencies": {
-    "blanket": "latest",
+    "istanbul": "latest",
     "http-server": "latest",
     "jscs": "latest",
     "jshint": "latest",
-    "mocha": "latest",
-    "mocha-multi": "latest",
-    "travis-cov": "latest"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "src"
-    }
+    "mocha": "latest"
   }
 }
