@@ -83,7 +83,7 @@ describe('Game', () => {
       game.addPlayer('TESTPLAYER');
       assert.equal(game.players.length, 1);
       assert.equal(game.players[0].name, 'TESTPLAYER');
-      assert.equal(game.players[0] instanceof Player, true);
+      assert(game.players[0] instanceof Player);
     });
   });
 });

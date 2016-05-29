@@ -19,7 +19,7 @@ class Game {
     } else {
       log('Game resumed at tick %d.', this.time);
     }
-    if (!this.loopId) {
+    if (this.loopId === undefined) {
       this.loopId = loop.setGameLoop(()=> {
         this.tick();
       }, this.tickInterval);
