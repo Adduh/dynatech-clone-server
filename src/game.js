@@ -12,7 +12,7 @@ class Game {
     this.running = true;
     this.time = 0;
     setInterval(()=> {
-     this.tick();
+      this.tick();
     }, this.tickInterval);
   }
 
@@ -23,6 +23,7 @@ class Game {
   setTickInterval(TimeInMilliseconds) {
     this.tickInterval = TimeInMilliseconds;
   }
+
   tick() {
     this.time++;
   }

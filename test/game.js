@@ -6,7 +6,7 @@ var Game = require('../src/game.js');
 
 describe('Game', () => {
   var game;
-  beforeEach(() => { game = new Game(1); });
+  beforeEach(() => { game = new Game(); });
   describe('contructor()', () => {
     it('initiates running and players', () => {
       assert.equal(game.running, false);
