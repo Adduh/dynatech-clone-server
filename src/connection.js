@@ -15,7 +15,7 @@ class Connection {
   }
 
   onRecv(data) {
-    console.log(data);
+    log(data);
   }
 }
 module.exports = Connection;

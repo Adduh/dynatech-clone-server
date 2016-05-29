@@ -18,10 +18,10 @@ class Server {
     }
     var server = net.createServer(socket => {
       this.connections.push(new Connection(socket));
-      log.debug('new client connected!');
+      log('new client connected!');
 
       socket.on('end', () => {
-        log.debug('client disconnected!');
+        log('client disconnected!');
         this.connections = this.connections.filter(element =>
           element !== socket);
       });
@@ -32,7 +32,7 @@ class Server {
 
   stop(callback) {
     var state = this.server ? 'running' : 'already stopped';
-   log.debug('Stop (%s) server!', state);
+   log('Stop (%s) server!', state);
 
     if (!this.server) {
       if (typeof callback === 'function') {
