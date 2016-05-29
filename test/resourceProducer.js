@@ -8,8 +8,8 @@ var ResourceProducer = require('../src/resourceProducer.js');
 describe('ResourceProducer', () => {
   var producer;
   var location;
-  beforeEach(() => { 
-    producer = new ResourceProducer({}, {}, 'somewhere'); 
+  beforeEach(() => {
+    producer = new ResourceProducer({}, {}, 'somewhere');
     location = { has: sinon.spy(), canStore: sinon.spy() };
 
   });
