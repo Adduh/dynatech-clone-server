@@ -1,6 +1,6 @@
-function debug(line) {
+function debug() {
   if(process.env.NODE_ENV !== 'test') {
-    console.log(line);
+    console.log.apply(this, arguments);
   }
 }
 
