@@ -9,15 +9,15 @@ describe('Game', () => {
   beforeEach(() => { game = new Game(10); });
   describe('contructor()', () => {
     it('initiates running, players and time', () => {
-      assert.equal(game.running, false);
+      assert.equal(game.intervalId, undefined);
       assert.equal(game.players.length, 0);
       assert.equal(game.time, 0);
     });
   });
   describe('start()', () => {
-    it('sets state to running', () => {
+    it('sets the interval', () => {
       game.start();
-      assert.equal(game.running, true);
+      assert.notEqual(game.intervalId, undefined);
 
     });
     it('starts ticking', done => {
@@ -48,11 +48,11 @@ describe('Game', () => {
     });
   });
   describe('stop()', () => {
-    it('sets state to not running', done => {
+    it('clears the interval', done => {
       game.start();
       setTimeout(() => {
         game.stop();
-        assert.equal(game.running, false);
+        assert.equal(game.intervalId, undefined);
         done();
       }, 2.5 * game.tickInterval);
     });
@@ -61,6 +61,7 @@ describe('Game', () => {
       setTimeout(() => {
         game.stop();
         setTimeout(() => {
+          assert.equal(game.intervalId, undefined);
           assert.equal(game.time, 2);
           done();
         }, 2 * game.tickInterval);

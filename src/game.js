@@ -4,15 +4,13 @@ const DEFAULT_TICK_INTERVAL = 200;
 
 class Game {
   constructor(tickInterval) {
-    this.running = false;
     this.players = [];
-    this.tickInterval = tickInterval ? tickInterval: DEFAULT_TICK_INTERVAL;
+    this.tickInterval = tickInterval ? tickInterval : DEFAULT_TICK_INTERVAL;
     this.time = 0;
   }
 
   start() {
-    if (!this.running) {
-      this.running = true;
+    if (!this.intervalId) {
       this.intervalId = setInterval(()=> {
         this.tick();
       }, this.tickInterval);
@@ -20,8 +18,8 @@ class Game {
   }
 
   stop() {
-    this.running = false;
     clearInterval(this.intervalId);
+    this.intervalId = undefined;
   }
 
   addPlayer(player) {
