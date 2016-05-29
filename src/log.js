@@ -1,14 +1,16 @@
+'use strict';
+
 function log() {
-  if(process.env.NODE_ENV !== 'test') {
+  if (process.env.NODE_ENV !== 'test') {
     var args = Array.prototype.slice.call(arguments);
     var date = new Date();
-    var dateFormat = date.getHours() + ":" +
-                     date.getMinutes() + ":" +
-                     date.getSeconds() + "." +
+    var dateFormat = date.getHours() + ':' +
+                     date.getMinutes() + ':' +
+                     date.getSeconds() + '.' +
                      date.getMilliseconds();
 
-    args[0] = dateFormat + " | " + args[0];
-    console.log.apply(this, args);
+    args[0] = dateFormat + ' | ' + args[0];
+    console.log.apply(null, args);
   }
 }
 
