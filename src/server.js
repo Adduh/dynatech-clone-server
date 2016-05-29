@@ -1,5 +1,6 @@
 'use strict';
 var net = require('net');
+var log = require('./log.js');
 var Connection = require('./connection.js');
 
 class Server {
@@ -17,10 +18,10 @@ class Server {
     }
     var server = net.createServer(socket => {
       this.connections.push(new Connection(socket));
-      console.warn('new client connected!');
+      log.debug('new client connected!');
 
       socket.on('end', () => {
-        console.warn('client disconnected!');
+        log.debug('client disconnected!');
         this.connections = this.connections.filter(element =>
           element !== socket);
       });
@@ -31,7 +32,7 @@ class Server {
 
   stop(callback) {
     var state = this.server ? 'running' : 'already stopped';
-    console.warn('Stop (%s) server!', state);
+   log.debug('Stop (%s) server!', state);
 
     if (!this.server) {
       if (typeof callback === 'function') {

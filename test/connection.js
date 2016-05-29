@@ -1,5 +1,6 @@
 'use strict';
 
+process.env.NODE_ENV = 'test';
 var net = require('net');
 var assert = require('assert');
 

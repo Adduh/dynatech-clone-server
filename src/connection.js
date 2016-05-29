@@ -1,5 +1,7 @@
 'use strict';
 
+var log = require('./log.js');
+
 class Connection {
   constructor(socket) {
     this.socket = socket;
