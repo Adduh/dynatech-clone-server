@@ -26,7 +26,8 @@
     "http-server": "latest",
     "jscs": "latest",
     "jshint": "latest",
-    "mocha": "latest"
+    "mocha": "latest",
+    "sinon": "latest"
   },
   "dependencies": {
     "node-gameloop": "^0.1.0"
