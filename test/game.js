@@ -6,7 +6,7 @@ var Game = require('../src/game.js');
 
 describe('Game', () => {
   var game;
-  beforeEach(() => { game = new Game(); });
+  beforeEach(() => { game = new Game(1); });
   describe('contructor()', () => {
     it('initiates running and players', () => {
       assert.equal(game.running, false);
@@ -17,6 +17,15 @@ describe('Game', () => {
     it('sets state to running', () => {
       game.start();
       assert.equal(game.running, true);
+      assert.equal(game.time, 0);
+    });
+    it('starts ticking', done => {
+      game.setTickInterval(10);
+      game.start();
+      setTimeout(() => {
+        assert.equal(game.time, 2);
+        done();
+      }, 2.5 * game.tickInterval);
     });
   });
   describe('addPlayer()', () => {
