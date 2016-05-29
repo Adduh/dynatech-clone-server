@@ -11,7 +11,10 @@ endif
 run: src node_modules
 	node src/index.js
 
-.PHONE: codestyle
+.PHONY: checkstyle
+checkstyle: codestyle
+
+.PHONY: codestyle
 codestyle: jscs jshint
 
 .PHONY: jscs
