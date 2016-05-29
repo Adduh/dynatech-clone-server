@@ -19,6 +19,7 @@ describe('Game', () => {
 
   describe('start()', () => {
     beforeEach(() => { game.start(); });
+    afterEach(() => { game.stop(); });
 
     it('sets the interval', () => {
       assert.notEqual(game.intervalId, undefined);
