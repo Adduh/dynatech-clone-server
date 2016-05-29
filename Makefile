@@ -38,7 +38,11 @@ cover: coverage
 .PHONY: coverage
 coverage:
 	@$(BIN)/istanbul cover $(BIN)/_mocha -- -R min test 2>/dev/null
-	@echo "Opening $(COVERAGE_INDEX) file in your browser now"
+	@echo "\nSee detailed coverage report at $(COVERAGE_INDEX)"
+
+.PHONY: show-coverage
+show-coverage:
+	@echo "\nOpening detailed coverage report at $(COVERAGE_INDEX) now."
 	@$(OPEN-CMD) $(COVERAGE_INDEX)
 
 node_modules:
