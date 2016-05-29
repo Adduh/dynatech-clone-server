@@ -11,7 +11,7 @@ describe('Game', () => {
 
   describe('contructor()', () => {
     it('initiates running, players and time', () => {
-      assert.equal(game.intervalId, undefined);
+      assert.equal(game.loopId, undefined);
       assert.equal(game.players.length, 0);
       assert.equal(game.time, 0);
     });
@@ -22,7 +22,7 @@ describe('Game', () => {
     afterEach(() => { game.stop(); });
 
     it('sets the interval', () => {
-      assert.notEqual(game.intervalId, undefined);
+      assert.notEqual(game.loopId, undefined);
     });
 
     it('starts ticking', done => {
@@ -66,12 +66,12 @@ describe('Game', () => {
     });
 
     it('clears the interval', () => {
-      assert.equal(game.intervalId, undefined);
+      assert.equal(game.loopId, undefined);
     });
 
     it('stops ticking', done => {
       setTimeout(() => {
-        assert.equal(game.intervalId, undefined);
+        assert.equal(game.loopId, undefined);
         assert.equal(game.time, 2);
         done();
       }, 2 * game.tickInterval);

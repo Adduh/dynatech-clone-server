@@ -4,6 +4,7 @@ const DEFAULT_TICK_INTERVAL = 200;
 
 var Player = require('./player.js');
 var log = require('./log.js');
+var loop = require('node-gameloop');
 
 class Game {
   constructor(tickInterval) {
@@ -18,8 +19,8 @@ class Game {
     } else {
       log('Game resumed at tick %d.', this.time);
     }
-    if (!this.intervalId) {
-      this.intervalId = setInterval(()=> {
+    if (!this.loopId) {
+      this.loopId = loop.setGameLoop(()=> {
         this.tick();
       }, this.tickInterval);
     }
@@ -27,8 +28,8 @@ class Game {
 
   stop() {
     log('Game stopped at tick %d.', this.time);
-    clearInterval(this.intervalId);
-    this.intervalId = undefined;
+    loop.clearGameLoop(this.loopId);
+    this.loopId = undefined;
   }
 
   addPlayer(name) {

@@ -2,7 +2,9 @@
   "name": "dynatech-clone-server",
   "version": "0.0.1",
   "description": "Game server for a clone of the game \"Dynatech\"",
-  "engines" : { "node" : ">=6.1.0" },
+  "engines": {
+    "node": ">=6.1.0"
+  },
   "scripts": {
     "start": "make run",
     "test": "make test",
@@ -25,5 +27,8 @@
     "jscs": "latest",
     "jshint": "latest",
     "mocha": "latest"
+  },
+  "dependencies": {
+    "node-gameloop": "^0.1.0"
   }
 }
