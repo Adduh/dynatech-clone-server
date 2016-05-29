@@ -3,6 +3,7 @@
 var assert = require('assert');
 
 var Game = require('../src/game.js');
+var Player = require('../src/player.js');
 
 describe('Game', () => {
   var game;
@@ -78,10 +79,10 @@ describe('Game', () => {
 
   describe('addPlayer()', () => {
     it('adds a Player into list', () => {
-      assert.equal(game.players.length, 0);
       game.addPlayer('TESTPLAYER');
       assert.equal(game.players.length, 1);
-      assert.equal(game.players[0], 'TESTPLAYER');
+      assert.equal(game.players[0].name, 'TESTPLAYER');
+      assert.equal(game.players[0] instanceof Player, true);
     });
   });
 });

@@ -1,8 +1,9 @@
 'use strict';
 
 class Player {
-  constructor() {
+  constructor(name) {
     this.producers = [];
+    this.name = name;
   }
   addProducer(producer) {
     this.producers.push(producer);

@@ -2,6 +2,8 @@
 
 const DEFAULT_TICK_INTERVAL = 200;
 
+var Player = require('./player.js');
+
 class Game {
   constructor(tickInterval) {
     this.players = [];
@@ -22,8 +24,8 @@ class Game {
     this.intervalId = undefined;
   }
 
-  addPlayer(player) {
-    this.players.push(player);
+  addPlayer(name) {
+    this.players.push(new Player(name));
   }
 
   tick() {
