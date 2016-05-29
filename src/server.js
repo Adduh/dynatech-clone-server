@@ -32,7 +32,7 @@ class Server {
 
   stop(callback) {
     var state = this.server ? 'running' : 'already stopped';
-   log('Stop (%s) server!', state);
+    log('Stop (%s) server!', state);
 
     if (!this.server) {
       if (typeof callback === 'function') {
