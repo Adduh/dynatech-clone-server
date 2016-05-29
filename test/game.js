@@ -8,16 +8,17 @@ describe('Game', () => {
   var game;
   beforeEach(() => { game = new Game(10); });
   describe('contructor()', () => {
-    it('initiates running and players', () => {
+    it('initiates running, players and time', () => {
       assert.equal(game.running, false);
       assert.equal(game.players.length, 0);
+      assert.equal(game.time, 0);
     });
   });
   describe('start()', () => {
     it('sets state to running', () => {
       game.start();
       assert.equal(game.running, true);
-      assert.equal(game.time, 0);
+
     });
     it('starts ticking', done => {
       game.start();
@@ -32,6 +33,17 @@ describe('Game', () => {
       setTimeout(() => {
         assert.equal(game.time, 2);
         done();
+      }, 2.5 * game.tickInterval);
+    });
+    it('resumes after stop', done => {
+      game.start();
+      setTimeout(() => {
+        game.stop();
+        setTimeout(() => {
+          game.start();
+          assert.equal(game.time, 2);
+          done();
+        }, 2 * game.tickInterval);
       }, 2.5 * game.tickInterval);
     });
   });

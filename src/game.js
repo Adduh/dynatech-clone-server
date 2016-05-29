@@ -7,12 +7,12 @@ class Game {
     this.running = false;
     this.players = [];
     this.tickInterval = tickInterval ? tickInterval: DEFAULT_TICK_INTERVAL;
+    this.time = 0;
   }
 
   start() {
     if (!this.running) {
       this.running = true;
-      this.time = 0;
       this.intervalId = setInterval(()=> {
         this.tick();
       }, this.tickInterval);
