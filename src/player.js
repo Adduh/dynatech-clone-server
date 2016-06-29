@@ -4,9 +4,11 @@ var log = require('./log.js');
 var Location = require('./location.js');
 
 class Player {
-  constructor(name) {
+  constructor(name, startMoney) {
     this.locations = [];
     this.name = name ? name : 'Unnamed Player';
+    this.money = startMoney;
+    this.ressources = {};
   }
 
   addLocation(location) {
@@ -23,6 +25,12 @@ class Player {
       location.tick();
     });
   }
+
+  getRessource(name) {
+    return this.ressources[name] ? this.ressources[name] : 0;
+  }
+
+  buyAndDeployProducer() {}
 }
 
 module.exports = Player;

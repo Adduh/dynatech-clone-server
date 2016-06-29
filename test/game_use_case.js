@@ -26,8 +26,8 @@ describe('Use case tests for game logic', () => {
       player.buyAndDeployProducer('Oil');
       game.tick();
 
-      assert.equals(player.money, 12000 - 10000 - 100);
-      assert.equals(player.ressources.oil, 12);
+      assert.equal(player.money, 12000 - 10000 - 100);
+      assert.equal(player.ressources.oil, 12);
     });
 
     it('does not buy if not enough money', () => {
@@ -35,8 +35,8 @@ describe('Use case tests for game logic', () => {
       player.buyAndDeployProducer('Oil');
       game.tick();
 
-      assert.equals(player.money, 9000);
-      assert.equals(player.ressources.oil, 0);
+      assert.equal(player.money, 9000);
+      assert.equal(player.getRessource('oil'), 0);
     });
   });
 });

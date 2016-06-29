@@ -32,15 +32,19 @@ class Game {
     this.loopId = undefined;
   }
 
-  addPlayer(name) {
+  addPlayer(name, startMoney) {
     log('Added player \"%s\".', name);
-    this.players.push(new Player(name));
+    var player = new Player(name, startMoney);
+    this.players.push(player);
+    return player;
   }
 
   tick() {
     this.time++;
     log('Tick %d is being processed.', this.time);
   }
+
+  addProducerFactory() {}
 }
 
 module.exports = Game;
