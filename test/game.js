@@ -86,6 +86,10 @@ describe('Game', () => {
       assert.equal(game.players[0].name, 'TESTPLAYER');
       assert(game.players[0] instanceof Player);
     });
+    it('sets the game to the player', () => {
+      game.addPlayer('TESTPLAYER', 10000);
+      assert.equal(game.players[0].game, game);
+    });
   });
 
   describe('createProducer()', () => {
