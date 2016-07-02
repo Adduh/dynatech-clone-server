@@ -11,6 +11,7 @@ class Game {
     this.players = [];
     this.tickInterval = tickInterval ? tickInterval : DEFAULT_TICK_INTERVAL;
     this.time = 0;
+    this.producerFactories = {};
   }
 
   start() {
@@ -34,7 +35,7 @@ class Game {
 
   addPlayer(name, startMoney) {
     log('Added player \"%s\".', name);
-    var player = new Player(name, startMoney);
+    var player = new Player(name, startMoney, this);
     this.players.push(player);
     return player;
   }
@@ -42,9 +43,21 @@ class Game {
   tick() {
     this.time++;
     log('Tick %d is being processed.', this.time);
+
+    this.players.forEach (player => {
+      player.tick();
+    });
   }
 
-  addProducerFactory() {}
+  addProducerFactory(factory) {
+    this.producerFactories[factory.data.name] = factory;
+  }
+
+  createProducer(name) {
+    if (this.producerFactories[name]) {
+      return this.producerFactories[name].create();
+    }
+  }
 }
 
 module.exports = Game;

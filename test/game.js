@@ -4,6 +4,7 @@ var assert = require('assert');
 
 var Game = require('../src/game.js');
 var Player = require('../src/player.js');
+var ProducerFactory = require('../src/factories/producer');
 
 describe('Game', () => {
   var game;
@@ -84,6 +85,31 @@ describe('Game', () => {
       assert.equal(game.players.length, 1);
       assert.equal(game.players[0].name, 'TESTPLAYER');
       assert(game.players[0] instanceof Player);
+    });
+  });
+
+  describe('createProducer()', () => {
+    beforeEach(() => {
+      var testProducerFactory = new ProducerFactory({
+        name: 'Oil',
+        cost: 10000,
+        output: { oil: 12 },
+        costPerTick: 100,
+      });
+      game.addProducerFactory(testProducerFactory);
+    });
+
+    it('creates an instance from the factory', () => {
+      var producer = game.createProducer('Oil');
+
+      assert.equal(producer.name, 'Oil');
+      assert.equal(producer.cost, 10000);
+    });
+
+    it('does nothing if factory not found', () => {
+      var producer = game.createProducer('foobar');
+
+      assert.equal(producer, null);
     });
   });
 });

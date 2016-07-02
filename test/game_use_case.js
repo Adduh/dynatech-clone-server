@@ -14,25 +14,24 @@ describe('Use case tests for game logic', () => {
       var testProducerFactory = new ProducerFactory({
         name: 'Oil',
         cost: 10000,
-        ressource: 'oil',
-        amountPerTick: 12,
-        costPerTick: 100
+        output: { oil: 12 },
+        costPerTick: 100,
       });
       game.addProducerFactory(testProducerFactory);
     });
 
     it('produces ressources after deployment', () => {
       var player = game.addPlayer('TESTPLAYER', 12000);
-      player.buyAndDeployProducer('Oil');
+      player.buildProducer('Oil');
       game.tick();
 
       assert.equal(player.money, 12000 - 10000 - 100);
-      assert.equal(player.ressources.oil, 12);
+      assert.equal(player.getRessource('oil'), 12);
     });
 
     it('does not buy if not enough money', () => {
       var player = game.addPlayer('TESTPLAYER', 9000);
-      player.buyAndDeployProducer('Oil');
+      player.buildProducer('Oil');
       game.tick();
 
       assert.equal(player.money, 9000);

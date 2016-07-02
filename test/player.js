@@ -5,6 +5,14 @@ var sinon = require('sinon');
 
 var Location = require('../src/location.js');
 var Player = require('../src/player.js');
+var ProducerFactory = require('../src/factories/producer');
+
+var testProducerFactory = new ProducerFactory({
+  name: 'Oil',
+  cost: 10000,
+  output: { oil: 12 },
+  costPerTick: 100,
+});
 
 describe('Player', () => {
   var player;
@@ -43,4 +51,21 @@ describe('Player', () => {
       assert.equal(location.tick.called, true);
     });
   });
+
+
+  describe('buildProducer()', () => {
+    it('adds a producer', () => {
+      player.money = 12000;
+      player.buildProducerByFactory(testProducerFactory);
+      assert.equal(player.producers.length, 1);
+      assert.equal(player.producers[0].name, 'Oil');
+    });
+
+    it('does nothing if not enough money', () => {
+      player.money = 1000;
+      player.buildProducerByFactory(testProducerFactory);
+      assert.equal(player.producers.length, 0);
+    });
+  });
+
 });
